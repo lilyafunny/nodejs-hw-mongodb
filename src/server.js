@@ -29,7 +29,6 @@ export const setupServer = () => {
     app.get('/', (req, res, next) => {
         res.json({
             message: 'Hello',
-            id: req.id,
         });
     });
 
@@ -47,7 +46,7 @@ export const setupServer = () => {
         const contact = await getContactById(contactId);
 
         if (!contact) {
-            res.status(400).json({
+            res.status(404).json({
                 message: 'Contact not found'
             });
             return;
@@ -60,17 +59,17 @@ export const setupServer = () => {
 
     });
 
-    app.use((error, req, res, next) => {
-        res.json({
-            errorMessage: error.message,
-            id: req.id,
-        });
-    });
-
     app.use((req, res) => {
         res.status(404).json({
             message: 'Not Found',
             status: 404,
+        });
+    });
+
+    app.use((err, req, res, next) => {
+        res.status(500).json({
+            message: 'Something went wrong',
+            error: err.message,
         });
     });
 
@@ -80,4 +79,4 @@ export const setupServer = () => {
         console.log(`Server is running on port ${PORT}`);
     });
 
-}
+};
