@@ -8,7 +8,7 @@ export const registerUserSchema = Joi.object({
         'any.required': 'Name is required',
     }),
 
-    email: Joi.string().min(3).max(20).messages({
+    email: Joi.string().min(3).max(22).messages({
         'string.base': 'Email should be a string',
         'string.min': 'Email should have at least 3 characters',
         'string.max': 'Email should have at most 20 characters',
@@ -20,4 +20,13 @@ export const registerUserSchema = Joi.object({
 export const loginUserSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
+});
+
+export const requestResetEmailSchema = Joi.object({
+    email: Joi.string().email().required(),
+});
+
+export const resetPasswordSchema = Joi.object({
+    password: Joi.string().required(),
+    token: Joi.string().required(),
 });
