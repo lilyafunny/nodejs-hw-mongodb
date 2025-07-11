@@ -10,5 +10,5 @@ const bootstrap = async () => {
     setupServer();
 };
 
-bootstrap();
+void bootstrap();
 
