@@ -1,0 +1,65 @@
+tags:
+  - Contacts
+summary: Update contact by ID
+operationId: updateContact
+description: Update the contact data by ID. Allows updating any field including the contact photo.
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: "65ca67e7ae7f10c88b598384"
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            example: "John Updated"
+          phoneNumber:
+            type: string
+            example: "+380671112233"
+          email:
+            type: string
+            example: "updated@example.com"
+          isFavourite:
+            type: boolean
+            example: false
+          contactType:
+            type: string
+            enum: [work, home, personal]
+            example: "home"
+          photo:
+            type: string
+            format: binary
+            description: Updated contact photo
+responses:
+  '200':
+    description: Contact successfully updated
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully patched a contact!
+            data:
+              $ref: '../../../components/schemas/contact.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
