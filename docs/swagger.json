@@ -11,8 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "Local development server"
+      "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://hw7-swagger-oe8s.onrender.com"
     }
   ],
   "tags": [
@@ -464,7 +466,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Contact successfully deleted. No content is returned."
           },
           "401": {
